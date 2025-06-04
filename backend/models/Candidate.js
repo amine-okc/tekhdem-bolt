@@ -9,6 +9,22 @@ const candidateSchema = new mongoose.Schema({
   first_name: { type: String, required: true },
   last_name: { type: String, required: true },
   birth_date: { type: Date, required: true },
+  steps: {
+    type: Map,
+    of: {
+      type: Boolean,
+      default: false,
+    },
+    default: {
+      personal_info: false,
+      experiences: false,
+      education: false,
+      languages: false,
+      skills: false,
+      cv_upload: false,
+    },
+  },
+  is_profile_complete: { type: Boolean, default: false },
   profile_picture: String,
   phone_number: String,
   address: {
