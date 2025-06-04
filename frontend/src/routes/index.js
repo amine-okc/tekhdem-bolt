@@ -27,6 +27,10 @@ const routes = [
     path: '/register',
     element: <Register />
   },
+  {
+    path: '/job-offers',
+    element: <JobOffersList />
+  },
   
   // Protected routes - these require authentication
   {

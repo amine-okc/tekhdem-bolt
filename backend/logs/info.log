@@ -128,3 +128,61 @@
 {"level":"info","message":"Connected to MongoDB","timestamp":"2025-06-04T09:05:48.396Z"}
 {"level":"info","message":"Server is running on port 4000","timestamp":"2025-06-04T09:06:05.257Z"}
 {"level":"info","message":"Connected to MongoDB","timestamp":"2025-06-04T09:06:05.465Z"}
+{"level":"info","message":"Server is running on port 4000","timestamp":"2025-06-04T10:17:43.285Z"}
+{"level":"info","message":"Connected to MongoDB","timestamp":"2025-06-04T10:17:43.540Z"}
+{"level":"info","message":"Server is running on port 4000","timestamp":"2025-06-04T10:19:51.235Z"}
+{"level":"info","message":"Connected to MongoDB","timestamp":"2025-06-04T10:19:51.484Z"}
+{"level":"info","message":"Server is running on port 4000","timestamp":"2025-06-04T10:20:21.993Z"}
+{"level":"info","message":"Connected to MongoDB","timestamp":"2025-06-04T10:20:22.209Z"}
+{"level":"info","message":"Server is running on port 4000","timestamp":"2025-06-04T10:20:46.610Z"}
+{"level":"info","message":"Connected to MongoDB","timestamp":"2025-06-04T10:20:46.822Z"}
+{"level":"info","message":"Server is running on port 4000","timestamp":"2025-06-04T10:21:00.336Z"}
+{"level":"info","message":"Connected to MongoDB","timestamp":"2025-06-04T10:21:00.544Z"}
+{"level":"info","message":"Server is running on port 4000","timestamp":"2025-06-04T10:21:45.237Z"}
+{"level":"info","message":"Connected to MongoDB","timestamp":"2025-06-04T10:21:45.557Z"}
+{"level":"info","message":"Server is running on port 4000","timestamp":"2025-06-04T10:22:03.874Z"}
+{"level":"info","message":"Connected to MongoDB","timestamp":"2025-06-04T10:22:04.088Z"}
+{"level":"info","message":"Server is running on port 4000","timestamp":"2025-06-04T10:22:48.849Z"}
+{"level":"info","message":"Connected to MongoDB","timestamp":"2025-06-04T10:22:49.088Z"}
+{"level":"info","message":"Server is running on port 4000","timestamp":"2025-06-04T10:23:41.062Z"}
+{"level":"info","message":"Connected to MongoDB","timestamp":"2025-06-04T10:23:41.270Z"}
+{"level":"info","message":"Server is running on port 4000","timestamp":"2025-06-04T10:24:20.834Z"}
+{"level":"info","message":"Connected to MongoDB","timestamp":"2025-06-04T10:24:21.124Z"}
+{"level":"info","message":"Server is running on port 4000","timestamp":"2025-06-04T10:25:40.955Z"}
+{"level":"info","message":"Connected to MongoDB","timestamp":"2025-06-04T10:25:41.210Z"}
+{"level":"info","message":"Server is running on port 4000","timestamp":"2025-06-04T10:29:29.156Z"}
+{"level":"info","message":"Connected to MongoDB","timestamp":"2025-06-04T10:29:29.440Z"}
+{"level":"info","message":"Server is running on port 4000","timestamp":"2025-06-04T10:29:53.267Z"}
+{"level":"info","message":"Connected to MongoDB","timestamp":"2025-06-04T10:29:53.475Z"}
+{"level":"info","message":"Server is running on port 4000","timestamp":"2025-06-04T10:32:13.467Z"}
+{"level":"error","message":"Error occured when reading routes : SyntaxError: Missing catch or finally after try","timestamp":"2025-06-04T10:32:13.493Z"}
+{"level":"info","message":"Connected to MongoDB","timestamp":"2025-06-04T10:32:13.695Z"}
+{"level":"info","message":"Server is running on port 4000","timestamp":"2025-06-04T10:33:40.241Z"}
+{"level":"info","message":"Connected to MongoDB","timestamp":"2025-06-04T10:33:40.473Z"}
+{"level":"info","message":"Server is running on port 4000","timestamp":"2025-06-04T10:35:02.954Z"}
+{"level":"info","message":"Connected to MongoDB","timestamp":"2025-06-04T10:35:03.226Z"}
+{"level":"info","message":"Server is running on port 4000","timestamp":"2025-06-04T10:35:48.185Z"}
+{"level":"info","message":"Connected to MongoDB","timestamp":"2025-06-04T10:35:48.418Z"}
+{"level":"info","message":"Server is running on port 4000","timestamp":"2025-06-04T10:37:35.902Z"}
+{"level":"info","message":"Connected to MongoDB","timestamp":"2025-06-04T10:37:36.161Z"}
+{"level":"info","message":"Server is running on port 4000","timestamp":"2025-06-04T10:42:27.977Z"}
+{"level":"info","message":"Connected to MongoDB","timestamp":"2025-06-04T10:42:28.211Z"}
+{"level":"info","message":"Server is running on port 4000","timestamp":"2025-06-04T10:43:22.774Z"}
+{"level":"info","message":"Connected to MongoDB","timestamp":"2025-06-04T10:43:22.998Z"}
+{"level":"info","message":"Server is running on port 4000","timestamp":"2025-06-04T11:47:15.389Z"}
+{"level":"info","message":"Connected to MongoDB","timestamp":"2025-06-04T11:47:15.695Z"}
+{"level":"info","message":"Server is running on port 4000","timestamp":"2025-06-04T11:56:11.972Z"}
+{"level":"error","message":"Error occured when reading routes : Error: Cannot find module '../models/CandidateProfile'\nRequire stack:\n- /Users/nassimoukaci/Documents/tekhdem-bolt/backend/controllers/user.js\n- /Users/nassimoukaci/Documents/tekhdem-bolt/backend/routes/user.js\n- /Users/nassimoukaci/Documents/tekhdem-bolt/backend/index.js","timestamp":"2025-06-04T11:56:12.024Z"}
+{"level":"info","message":"Connected to MongoDB","timestamp":"2025-06-04T11:56:12.250Z"}
+{"level":"info","message":"Server is running on port 4000","timestamp":"2025-06-04T11:57:03.010Z"}
+{"level":"info","message":"Connected to MongoDB","timestamp":"2025-06-04T11:57:03.265Z"}
+{"level":"info","message":"Server is running on port 4000","timestamp":"2025-06-04T11:58:28.863Z"}
+{"level":"info","message":"Connected to MongoDB","timestamp":"2025-06-04T11:58:29.097Z"}
+{"level":"info","message":"Server is running on port 4000","timestamp":"2025-06-04T11:59:28.813Z"}
+{"level":"info","message":"Connected to MongoDB","timestamp":"2025-06-04T11:59:29.052Z"}
+{"level":"info","message":"Server is running on port 4000","timestamp":"2025-06-04T12:00:14.418Z"}
+{"level":"info","message":"Connected to MongoDB","timestamp":"2025-06-04T12:00:14.650Z"}
+{"level":"info","message":"Server is running on port 4000","timestamp":"2025-06-04T12:01:27.420Z"}
+{"level":"info","message":"Connected to MongoDB","timestamp":"2025-06-04T12:01:27.812Z"}
+{"level":"info","message":"Server is running on port 4000","timestamp":"2025-06-04T12:03:51.441Z"}
+{"level":"info","message":"Connected to MongoDB","timestamp":"2025-06-04T12:03:51.689Z"}

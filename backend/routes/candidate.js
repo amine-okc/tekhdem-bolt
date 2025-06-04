@@ -13,5 +13,6 @@ router.get('/test', (req, res) => {
 
 router.post('/register', apis.registerCandidateStep1)
 router.post('/register/step2', apis.registerCandidateStep2)
+router.post('/auth/google-signin', apis.signInWithGoogle)
 
 module.exports = router

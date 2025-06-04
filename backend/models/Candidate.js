@@ -8,7 +8,7 @@ const candidateSchema = new mongoose.Schema({
   },
   first_name: { type: String, required: true },
   last_name: { type: String, required: true },
-  birth_date: { type: Date, required: true },
+  birth_date: { type: Date },
   steps: {
     type: Map,
     of: {
