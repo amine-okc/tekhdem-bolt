@@ -1,20 +1,23 @@
 import React, { useState, useEffect } from 'react';
 import { LockIcon, MailIcon } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
 import axios from 'axios';
-import { setAuthToken, setUser, isAuthenticated } from '../utils/auth';
+import { setCredentials } from '../store/authSlice';
 
 const LoginPage = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const { token } = useSelector((state) => state.auth);
 
   useEffect(() => {
-    if (isAuthenticated()) {
+    if (token) {
       navigate('/dashboard');
     }
-  }, [navigate]);
+  }, [token, navigate]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -27,8 +30,7 @@ const LoginPage = () => {
       });
 
       const { token, user } = response.data;
-      setAuthToken(token);
-      setUser(user);
+      dispatch(setCredentials({ user, token }));
       navigate('/dashboard');
     } catch (err) {
       setError(err.response?.data?.error || 'Une erreur est survenue');
@@ -145,16 +147,6 @@ const LoginPage = () => {
               Se connecter
             </button>
           </form>
-
-          {/* Mobile Image for smaller screens */}
-          <div className="lg:hidden text-center mt-6">
-            <div 
-              className="h-48 w-full bg-cover bg-center rounded-lg mb-4"
-              style={{
-                backgroundImage: `url("/api/placeholder/800/400?text=Professional+Network")`,
-              }}
-            />
-          </div>
 
           <div className="text-center">
             <p className="text-sm text-gray-600 dark:text-gray-400 mb-2">
