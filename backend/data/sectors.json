@@ -1,0 +1,128 @@
+[
+    {
+        "name": "Hôtellerie",
+        "description": "Secteur dédié aux services d'hébergement et d'accueil.",
+        "isActive": true,
+        "createdAt": "2025-03-27T12:00:00Z",
+        "updatedAt": "2025-03-27T12:00:00Z"
+    },
+    {
+        "name": "Restauration",
+        "description": "Secteur couvrant les restaurants, cafés et services de restauration.",
+        "isActive": true,
+        "createdAt": "2025-03-27T12:00:00Z",
+        "updatedAt": "2025-03-27T12:00:00Z"
+    },
+    {
+        "name": "Tourisme",
+        "description": "Industrie liée aux voyages, aux loisirs et aux activités touristiques.",
+        "isActive": true,
+        "createdAt": "2025-03-27T12:00:00Z",
+        "updatedAt": "2025-03-27T12:00:00Z"
+    },
+    {
+        "name": "Événementiel",
+        "description": "Organisation et gestion d'événements professionnels et privés.",
+        "isActive": true,
+        "createdAt": "2025-03-27T12:00:00Z",
+        "updatedAt": "2025-03-27T12:00:00Z"
+    },
+    {
+        "name": "Commerce",
+        "description": "Vente de produits et services dans le cadre du commerce de détail et de gros.",
+        "isActive": true,
+        "createdAt": "2025-03-27T12:00:00Z",
+        "updatedAt": "2025-03-27T12:00:00Z"
+    },
+    {
+        "name": "Transport & Logistique",
+        "description": "Gestion des déplacements de marchandises et des services de transport.",
+        "isActive": true,
+        "createdAt": "2025-03-27T12:00:00Z",
+        "updatedAt": "2025-03-27T12:00:00Z"
+    },
+    {
+        "name": "Service à la personne",
+        "description": "Aide et accompagnement aux particuliers dans leur quotidien.",
+        "isActive": true,
+        "createdAt": "2025-03-27T12:00:00Z",
+        "updatedAt": "2025-03-27T12:00:00Z"
+    },
+    {
+        "name": "Informatique & IT",
+        "description": "Développement logiciel, cybersécurité, administration des systèmes et réseaux.",
+        "isActive": true,
+        "createdAt": "2025-03-27T12:00:00Z",
+        "updatedAt": "2025-03-27T12:00:00Z"
+    },
+    {
+        "name": "Industrie & Production",
+        "description": "Fabrication de biens, production manufacturière et industries lourdes.",
+        "isActive": true,
+        "createdAt": "2025-03-27T12:00:00Z",
+        "updatedAt": "2025-03-27T12:00:00Z"
+    },
+    {
+        "name": "BTP & Construction",
+        "description": "Travaux publics, bâtiment et génie civil.",
+        "isActive": true,
+        "createdAt": "2025-03-27T12:00:00Z",
+        "updatedAt": "2025-03-27T12:00:00Z"
+    },
+    {
+        "name": "Santé & Médecine",
+        "description": "Soins médicaux, hôpitaux, cliniques et services de santé.",
+        "isActive": true,
+        "createdAt": "2025-03-27T12:00:00Z",
+        "updatedAt": "2025-03-27T12:00:00Z"
+    },
+    {
+        "name": "Éducation & Formation",
+        "description": "Enseignement, formations professionnelles et académiques.",
+        "isActive": true,
+        "createdAt": "2025-03-27T12:00:00Z",
+        "updatedAt": "2025-03-27T12:00:00Z"
+    },
+    {
+        "name": "Finance & Assurance",
+        "description": "Banque, gestion de patrimoine et assurances.",
+        "isActive": true,
+        "createdAt": "2025-03-27T12:00:00Z",
+        "updatedAt": "2025-03-27T12:00:00Z"
+    },
+    {
+        "name": "Marketing & Communication",
+        "description": "Publicité, stratégie digitale et communication d'entreprise.",
+        "isActive": true,
+        "createdAt": "2025-03-27T12:00:00Z",
+        "updatedAt": "2025-03-27T12:00:00Z"
+    },
+    {
+        "name": "Agriculture & Agroalimentaire",
+        "description": "Production agricole, élevage et transformation alimentaire.",
+        "isActive": true,
+        "createdAt": "2025-03-27T12:00:00Z",
+        "updatedAt": "2025-03-27T12:00:00Z"
+    },
+    {
+        "name": "Énergie & Environnement",
+        "description": "Production d’énergie, énergies renouvelables et gestion environnementale.",
+        "isActive": true,
+        "createdAt": "2025-03-27T12:00:00Z",
+        "updatedAt": "2025-03-27T12:00:00Z"
+    },
+    {
+        "name": "Droit & Juridique",
+        "description": "Services légaux, avocats et conseils juridiques.",
+        "isActive": true,
+        "createdAt": "2025-03-27T12:00:00Z",
+        "updatedAt": "2025-03-27T12:00:00Z"
+    },
+    {
+        "name": "Arts & Culture",
+        "description": "Création artistique, industrie du spectacle et patrimoine culturel.",
+        "isActive": true,
+        "createdAt": "2025-03-27T12:00:00Z",
+        "updatedAt": "2025-03-27T12:00:00Z"
+    }
+]

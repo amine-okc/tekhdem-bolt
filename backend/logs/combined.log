@@ -1,0 +1,144 @@
+{"level":"info","message":"Connected to MongoDB","timestamp":"2025-03-26T11:47:07.282Z"}
+{"level":"info","message":"Connected to MongoDB","timestamp":"2025-03-26T11:50:12.117Z"}
+{"level":"info","message":"Connected to MongoDB","timestamp":"2025-03-26T11:57:42.465Z"}
+{"level":"info","message":"Connected to MongoDB","timestamp":"2025-03-26T11:59:10.701Z"}
+{"level":"info","message":"Connected to MongoDB","timestamp":"2025-03-26T11:59:51.483Z"}
+{"level":"info","message":"Connected to MongoDB","timestamp":"2025-03-26T12:00:45.950Z"}
+{"level":"info","message":"Connected to MongoDB","timestamp":"2025-03-26T12:02:26.443Z"}
+{"level":"info","message":"Connected to MongoDB","timestamp":"2025-03-26T12:03:05.417Z"}
+{"level":"info","message":"Connected to MongoDB","timestamp":"2025-03-26T12:28:01.561Z"}
+{"level":"info","message":"Connected to MongoDB","timestamp":"2025-03-26T12:28:16.285Z"}
+{"level":"info","message":"Server is running on port 4001","timestamp":"2025-03-26T12:29:57.788Z"}
+{"level":"info","message":"Connected to MongoDB","timestamp":"2025-03-26T12:29:58.022Z"}
+{"level":"info","message":"Server is running on port 4001","timestamp":"2025-03-26T12:30:39.909Z"}
+{"level":"info","message":"Connected to MongoDB","timestamp":"2025-03-26T12:30:40.095Z"}
+{"level":"info","message":"Server is running on port 4001","timestamp":"2025-03-26T12:30:50.029Z"}
+{"level":"error","message":"Error occured when reading routes : TypeError: Router.use() requires a middleware function but got a Object","timestamp":"2025-03-26T12:30:50.057Z"}
+{"level":"info","message":"Connected to MongoDB","timestamp":"2025-03-26T12:30:50.245Z"}
+{"level":"info","message":"Server is running on port 4001","timestamp":"2025-03-26T12:31:14.740Z"}
+{"level":"info","message":"Connected to MongoDB","timestamp":"2025-03-26T12:31:14.934Z"}
+{"level":"info","message":"Server is running on port 4001","timestamp":"2025-03-26T12:32:09.684Z"}
+{"level":"info","message":"Connected to MongoDB","timestamp":"2025-03-26T12:32:09.907Z"}
+{"level":"info","message":"Server is running on port 4001","timestamp":"2025-03-26T12:33:18.707Z"}
+{"level":"info","message":"Connected to MongoDB","timestamp":"2025-03-26T12:33:18.953Z"}
+{"level":"info","message":"Server is running on port 4001","timestamp":"2025-03-26T12:36:23.425Z"}
+{"level":"info","message":"Connected to MongoDB","timestamp":"2025-03-26T12:36:23.653Z"}
+{"level":"info","message":"Server is running on port 4001","timestamp":"2025-03-26T19:49:41.977Z"}
+{"errorLabelSet":{},"level":"error","message":"Could not connect to MongoDB: Could not connect to any servers in your MongoDB Atlas cluster. One common reason is that you're trying to access the database from an IP that isn't whitelisted. Make sure your current IP address is on your Atlas cluster's IP whitelist: https://www.mongodb.com/docs/atlas/security-whitelist/","reason":{"commonWireVersion":0,"compatible":true,"heartbeatFrequencyMS":10000,"localThresholdMS":15,"logicalSessionTimeoutMinutes":null,"maxElectionId":null,"maxSetVersion":null,"servers":{"ac-cwqohrq-shard-00-00.e2mx0n8.mongodb.net:27017":{"$clusterTime":null,"address":"ac-cwqohrq-shard-00-00.e2mx0n8.mongodb.net:27017","arbiters":[],"electionId":null,"error":{"beforeHandshake":false,"errorLabelSet":{}},"hosts":[],"iscryptd":false,"lastUpdateTime":966647316,"lastWriteDate":0,"logicalSessionTimeoutMinutes":null,"maxBsonObjectSize":null,"maxMessageSizeBytes":null,"maxWireVersion":0,"maxWriteBatchSize":null,"me":null,"minRoundTripTime":0,"minWireVersion":0,"passives":[],"primary":null,"roundTripTime":-1,"setName":null,"setVersion":null,"tags":{},"topologyVersion":null,"type":"Unknown"},"ac-cwqohrq-shard-00-01.e2mx0n8.mongodb.net:27017":{"$clusterTime":null,"address":"ac-cwqohrq-shard-00-01.e2mx0n8.mongodb.net:27017","arbiters":[],"electionId":null,"error":{"beforeHandshake":false,"errorLabelSet":{}},"hosts":[],"iscryptd":false,"lastUpdateTime":966647364,"lastWriteDate":0,"logicalSessionTimeoutMinutes":null,"maxBsonObjectSize":null,"maxMessageSizeBytes":null,"maxWireVersion":0,"maxWriteBatchSize":null,"me":null,"minRoundTripTime":0,"minWireVersion":0,"passives":[],"primary":null,"roundTripTime":-1,"setName":null,"setVersion":null,"tags":{},"topologyVersion":null,"type":"Unknown"},"ac-cwqohrq-shard-00-02.e2mx0n8.mongodb.net:27017":{"$clusterTime":null,"address":"ac-cwqohrq-shard-00-02.e2mx0n8.mongodb.net:27017","arbiters":[],"electionId":null,"error":{"beforeHandshake":false,"errorLabelSet":{}},"hosts":[],"iscryptd":false,"lastUpdateTime":966647379,"lastWriteDate":0,"logicalSessionTimeoutMinutes":null,"maxBsonObjectSize":null,"maxMessageSizeBytes":null,"maxWireVersion":0,"maxWriteBatchSize":null,"me":null,"minRoundTripTime":0,"minWireVersion":0,"passives":[],"primary":null,"roundTripTime":-1,"setName":null,"setVersion":null,"tags":{},"topologyVersion":null,"type":"Unknown"}},"setName":"atlas-upa0n0-shard-0","stale":false,"type":"ReplicaSetNoPrimary"},"stack":"MongooseServerSelectionError: Could not connect to any servers in your MongoDB Atlas cluster. One common reason is that you're trying to access the database from an IP that isn't whitelisted. Make sure your current IP address is on your Atlas cluster's IP whitelist: https://www.mongodb.com/docs/atlas/security-whitelist/\n    at _handleConnectionErrors (/Users/nassimoukaci/Documents/tekhdem/backend/node_modules/mongoose/lib/connection.js:1165:11)\n    at NativeConnection.openUri (/Users/nassimoukaci/Documents/tekhdem/backend/node_modules/mongoose/lib/connection.js:1096:11)","timestamp":"2025-03-26T19:50:12.056Z"}
+{"level":"info","message":"Server is running on port 4001","timestamp":"2025-03-26T20:05:20.458Z"}
+{"level":"info","message":"Connected to MongoDB","timestamp":"2025-03-26T20:05:21.180Z"}
+{"level":"info","message":"Server is running on port 4001","timestamp":"2025-03-26T20:11:53.691Z"}
+{"level":"info","message":"Connected to MongoDB","timestamp":"2025-03-26T20:11:54.279Z"}
+{"level":"info","message":"Server is running on port 4001","timestamp":"2025-03-26T20:12:24.812Z"}
+{"level":"info","message":"Connected to MongoDB","timestamp":"2025-03-26T20:12:25.276Z"}
+{"level":"info","message":"Server is running on port 4001","timestamp":"2025-03-26T20:13:30.461Z"}
+{"level":"info","message":"Connected to MongoDB","timestamp":"2025-03-26T20:13:31.091Z"}
+{"level":"info","message":"Server is running on port 4001","timestamp":"2025-03-26T20:13:45.636Z"}
+{"level":"info","message":"Connected to MongoDB","timestamp":"2025-03-26T20:13:46.135Z"}
+{"level":"info","message":"Server is running on port 4001","timestamp":"2025-03-26T20:14:40.342Z"}
+{"level":"info","message":"Connected to MongoDB","timestamp":"2025-03-26T20:14:40.884Z"}
+{"level":"info","message":"Server is running on port 4001","timestamp":"2025-03-26T20:14:55.366Z"}
+{"level":"info","message":"Connected to MongoDB","timestamp":"2025-03-26T20:14:55.858Z"}
+{"level":"info","message":"Server is running on port 4001","timestamp":"2025-03-26T20:15:27.535Z"}
+{"level":"info","message":"Connected to MongoDB","timestamp":"2025-03-26T20:15:28.017Z"}
+{"level":"info","message":"Server is running on port 4001","timestamp":"2025-03-26T20:16:25.622Z"}
+{"level":"info","message":"Connected to MongoDB","timestamp":"2025-03-26T20:16:26.255Z"}
+{"level":"info","message":"Server is running on port 4001","timestamp":"2025-03-26T20:17:33.244Z"}
+{"level":"info","message":"Connected to MongoDB","timestamp":"2025-03-26T20:17:34.013Z"}
+{"level":"info","message":"Server is running on port 4001","timestamp":"2025-03-26T20:22:20.817Z"}
+{"level":"info","message":"Connected to MongoDB","timestamp":"2025-03-26T20:22:21.419Z"}
+{"level":"info","message":"Server is running on port 4001","timestamp":"2025-03-26T20:40:32.904Z"}
+{"level":"info","message":"Connected to MongoDB","timestamp":"2025-03-26T20:40:33.599Z"}
+{"level":"info","message":"Server is running on port 4001","timestamp":"2025-03-26T20:45:14.028Z"}
+{"level":"info","message":"Connected to MongoDB","timestamp":"2025-03-26T20:45:14.596Z"}
+{"level":"info","message":"Server is running on port 4001","timestamp":"2025-03-26T20:45:35.436Z"}
+{"level":"info","message":"Connected to MongoDB","timestamp":"2025-03-26T20:45:35.917Z"}
+{"level":"info","message":"Server is running on port 4001","timestamp":"2025-03-26T20:48:45.627Z"}
+{"level":"info","message":"Connected to MongoDB","timestamp":"2025-03-26T20:48:46.214Z"}
+{"level":"info","message":"Server is running on port 4001","timestamp":"2025-03-27T18:41:01.028Z"}
+{"level":"info","message":"Connected to MongoDB","timestamp":"2025-03-27T18:41:01.749Z"}
+{"level":"info","message":"Server is running on port 4000","timestamp":"2025-03-27T18:42:12.630Z"}
+{"level":"info","message":"Connected to MongoDB","timestamp":"2025-03-27T18:42:13.210Z"}
+{"level":"info","message":"Server is running on port 4000","timestamp":"2025-03-27T18:43:33.121Z"}
+{"level":"info","message":"Connected to MongoDB","timestamp":"2025-03-27T18:43:33.645Z"}
+{"level":"info","message":"Server is running on port 4000","timestamp":"2025-03-27T18:44:39.056Z"}
+{"level":"info","message":"Connected to MongoDB","timestamp":"2025-03-27T18:44:39.566Z"}
+{"level":"info","message":"Server is running on port 4000","timestamp":"2025-03-27T18:44:55.376Z"}
+{"level":"info","message":"Connected to MongoDB","timestamp":"2025-03-27T18:44:55.825Z"}
+{"level":"info","message":"Server is running on port 4000","timestamp":"2025-03-27T18:45:21.860Z"}
+{"level":"info","message":"Connected to MongoDB","timestamp":"2025-03-27T18:45:23.318Z"}
+{"level":"info","message":"Server is running on port 4000","timestamp":"2025-03-27T18:46:31.512Z"}
+{"level":"info","message":"Connected to MongoDB","timestamp":"2025-03-27T18:46:32.072Z"}
+{"level":"info","message":"Server is running on port 4000","timestamp":"2025-03-27T18:47:00.969Z"}
+{"level":"info","message":"Connected to MongoDB","timestamp":"2025-03-27T18:47:01.434Z"}
+{"level":"info","message":"Server is running on port 4000","timestamp":"2025-03-27T18:47:39.740Z"}
+{"level":"info","message":"Connected to MongoDB","timestamp":"2025-03-27T18:47:40.254Z"}
+{"level":"info","message":"Server is running on port 4000","timestamp":"2025-03-27T18:48:25.533Z"}
+{"level":"info","message":"Connected to MongoDB","timestamp":"2025-03-27T18:48:26.064Z"}
+{"level":"info","message":"Server is running on port 4000","timestamp":"2025-03-27T18:49:37.373Z"}
+{"level":"info","message":"Connected to MongoDB","timestamp":"2025-03-27T18:49:37.950Z"}
+{"level":"info","message":"Server is running on port 4000","timestamp":"2025-03-27T18:51:11.420Z"}
+{"level":"info","message":"Connected to MongoDB","timestamp":"2025-03-27T18:51:11.962Z"}
+{"level":"info","message":"Server is running on port 4000","timestamp":"2025-03-27T18:52:51.413Z"}
+{"level":"info","message":"Connected to MongoDB","timestamp":"2025-03-27T18:52:51.983Z"}
+{"level":"info","message":"Server is running on port 4000","timestamp":"2025-03-27T19:38:57.486Z"}
+{"level":"info","message":"Connected to MongoDB","timestamp":"2025-03-27T19:38:58.150Z"}
+{"level":"info","message":"Server is running on port 4000","timestamp":"2025-03-28T16:00:36.251Z"}
+{"level":"info","message":"Connected to MongoDB","timestamp":"2025-03-28T16:00:36.488Z"}
+{"level":"info","message":"Server is running on port 4000","timestamp":"2025-03-28T20:35:02.577Z"}
+{"level":"info","message":"Connected to MongoDB","timestamp":"2025-03-28T20:35:03.330Z"}
+{"level":"info","message":"Server is running on port 4000","timestamp":"2025-03-29T17:23:07.431Z"}
+{"level":"info","message":"Connected to MongoDB","timestamp":"2025-03-29T17:23:08.125Z"}
+{"level":"info","message":"Server is running on port 4000","timestamp":"2025-04-25T19:01:00.275Z"}
+{"level":"error","message":"Error occured when reading routes : Error: Cannot find module '../models/Company'\nRequire stack:\n- /Users/nassimoukaci/Documents/tekhdem/backend/middlewares/isPermitted.js\n- /Users/nassimoukaci/Documents/tekhdem/backend/routes/admin.js\n- /Users/nassimoukaci/Documents/tekhdem/backend/index.js","timestamp":"2025-04-25T19:01:00.287Z"}
+{"level":"info","message":"Connected to MongoDB","timestamp":"2025-04-25T19:01:01.023Z"}
+{"level":"info","message":"Server is running on port 4000","timestamp":"2025-04-25T19:01:29.390Z"}
+{"level":"info","message":"Connected to MongoDB","timestamp":"2025-04-25T19:01:29.929Z"}
+{"level":"info","message":"Server is running on port 4000","timestamp":"2025-04-25T19:02:41.006Z"}
+{"level":"info","message":"Connected to MongoDB","timestamp":"2025-04-25T19:02:41.848Z"}
+{"level":"info","message":"Server is running on port 4000","timestamp":"2025-04-25T19:36:01.721Z"}
+{"level":"error","message":"Error occured when reading routes : Error: Cannot find module '../controllers/company'\nRequire stack:\n- /Users/nassimoukaci/Documents/tekhdem/backend/routes/company.js\n- /Users/nassimoukaci/Documents/tekhdem/backend/index.js","timestamp":"2025-04-25T19:36:01.756Z"}
+{"level":"info","message":"Connected to MongoDB","timestamp":"2025-04-25T19:36:02.430Z"}
+{"level":"info","message":"Server is running on port 4000","timestamp":"2025-04-25T19:36:37.487Z"}
+{"level":"info","message":"Connected to MongoDB","timestamp":"2025-04-25T19:36:37.974Z"}
+{"level":"info","message":"Server is running on port 4000","timestamp":"2025-04-25T19:38:19.859Z"}
+{"level":"info","message":"Connected to MongoDB","timestamp":"2025-04-25T19:38:20.657Z"}
+{"level":"info","message":"Server is running on port 4000","timestamp":"2025-04-25T19:39:32.117Z"}
+{"level":"error","message":"Error occured when reading routes : Error: Cannot find module 'bcrypt'\nRequire stack:\n- /Users/nassimoukaci/Documents/tekhdem/backend/controllers/candidate.js\n- /Users/nassimoukaci/Documents/tekhdem/backend/routes/candidate.js\n- /Users/nassimoukaci/Documents/tekhdem/backend/index.js","timestamp":"2025-04-25T19:39:32.151Z"}
+{"level":"info","message":"Connected to MongoDB","timestamp":"2025-04-25T19:39:32.667Z"}
+{"level":"info","message":"Server is running on port 4000","timestamp":"2025-04-25T19:40:10.289Z"}
+{"level":"info","message":"Connected to MongoDB","timestamp":"2025-04-25T19:40:10.955Z"}
+{"level":"info","message":"Server is running on port 4000","timestamp":"2025-04-25T19:54:28.132Z"}
+{"level":"info","message":"Connected to MongoDB","timestamp":"2025-04-25T19:54:28.952Z"}
+{"level":"info","message":"Server is running on port 4000","timestamp":"2025-04-25T19:54:45.195Z"}
+{"level":"info","message":"Connected to MongoDB","timestamp":"2025-04-25T19:54:45.681Z"}
+{"level":"info","message":"Server is running on port 4000","timestamp":"2025-04-25T19:56:06.711Z"}
+{"level":"info","message":"Connected to MongoDB","timestamp":"2025-04-25T19:56:07.535Z"}
+{"level":"info","message":"Server is running on port 4000","timestamp":"2025-04-25T20:03:48.922Z"}
+{"level":"info","message":"Connected to MongoDB","timestamp":"2025-04-25T20:03:49.593Z"}
+{"level":"info","message":"Server is running on port 4000","timestamp":"2025-04-25T20:05:01.137Z"}
+{"level":"info","message":"Connected to MongoDB","timestamp":"2025-04-25T20:05:01.651Z"}
+{"level":"info","message":"Server is running on port 4000","timestamp":"2025-04-25T20:10:01.990Z"}
+{"level":"info","message":"Connected to MongoDB","timestamp":"2025-04-25T20:10:02.678Z"}
+{"level":"info","message":"Server is running on port 4000","timestamp":"2025-04-25T20:11:31.489Z"}
+{"level":"info","message":"Connected to MongoDB","timestamp":"2025-04-25T20:11:32.178Z"}
+{"level":"info","message":"Server is running on port 4000","timestamp":"2025-04-25T20:14:47.845Z"}
+{"level":"info","message":"Connected to MongoDB","timestamp":"2025-04-25T20:14:48.694Z"}
+{"level":"info","message":"Server is running on port 4000","timestamp":"2025-04-25T20:15:23.075Z"}
+{"level":"info","message":"Connected to MongoDB","timestamp":"2025-04-25T20:15:23.618Z"}
+{"level":"info","message":"Server is running on port 4000","timestamp":"2025-04-25T20:21:27.965Z"}
+{"level":"info","message":"Connected to MongoDB","timestamp":"2025-04-25T20:21:28.696Z"}
+{"level":"info","message":"Server is running on port 4000","timestamp":"2025-04-25T20:24:40.290Z"}
+{"level":"info","message":"Connected to MongoDB","timestamp":"2025-04-25T20:24:41.009Z"}
+{"level":"info","message":"Server is running on port 4000","timestamp":"2025-04-25T20:27:45.306Z"}
+{"level":"info","message":"Connected to MongoDB","timestamp":"2025-04-25T20:27:46.011Z"}
+{"level":"info","message":"Server is running on port 4000","timestamp":"2025-05-10T19:18:37.151Z"}
+{"level":"info","message":"Connected to MongoDB","timestamp":"2025-05-10T19:18:37.995Z"}
+{"level":"info","message":"Server is running on port 4000","timestamp":"2025-05-23T15:46:18.654Z"}
+{"level":"info","message":"Connected to MongoDB","timestamp":"2025-05-23T15:46:18.979Z"}
+{"level":"info","message":"Server is running on port 4000","timestamp":"2025-05-23T15:55:00.636Z"}
+{"level":"info","message":"Connected to MongoDB","timestamp":"2025-05-23T15:55:00.873Z"}
+{"level":"info","message":"Server is running on port 4000","timestamp":"2025-05-29T08:23:57.246Z"}
+{"level":"info","message":"Connected to MongoDB","timestamp":"2025-05-29T08:23:58.015Z"}
+{"level":"info","message":"Server is running on port 4000","timestamp":"2025-05-29T08:27:08.448Z"}
+{"level":"info","message":"Connected to MongoDB","timestamp":"2025-05-29T08:27:09.055Z"}
