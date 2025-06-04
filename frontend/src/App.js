@@ -10,6 +10,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { logout, initializeSocket, verifyAuth } from './store/authSlice';
 import { setupTokenValidation } from './utils/axiosInterceptor';
 import axios from 'axios';
+import { SocketProvider } from "./context/SocketContext";
 
 function App() {
   const dispatch = useDispatch();
@@ -90,6 +91,7 @@ function App() {
   };
 
   return (
+    <SocketProvider>
     <Router>
       <div className="flex flex-col min-h-screen">
         <NavBar 
@@ -113,6 +115,7 @@ function App() {
         <AuthErrorOverlay />
       </div>
     </Router>
+    </SocketProvider>
   );
 }
 

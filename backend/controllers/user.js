@@ -91,35 +91,35 @@ const verifyToken = async (req, res) => {
 
 // --- Google Sign-In/Registration ---
 
-// Helper function to create/update candidate profile from Google data
-const createOrUpdateCandidateProfileFromGoogle = async (userId, firstName, lastName, googleEmail) => {
-  try {
-    let profile = await Candidate.findOne({ userId });
+// // Helper function to create/update candidate profile from Google data
+// const createOrUpdateCandidateProfileFromGoogle = async (userId, firstName, lastName, googleEmail) => {
+//   try {
+//     let profile = await Candidate.findOne({ userId });
 
-    if (profile) {
-      // Optionally update if Google provides newer info, though for login this might not be necessary
-      // For example, if a user changes their name on Google.
-      // profile.firstName = firstName || profile.firstName;
-      // profile.lastName = lastName || profile.lastName;
-      // await profile.save();
-    } else {
-      // Create new profile if it doesn't exist
-      profile = new Candidate({
-        userId,
-        firstName: firstName || '', 
-        lastName: lastName || '',  
-        email: googleEmail, // Store email in profile as well if your schema has it
-        // birthDate: null, // Birthdate is not provided by Google token info by default
-        // Other fields can be set to default or prompted later
-      });
-      await profile.save();
-    }
-    return profile;
-  } catch (error) {
-    console.error("Error creating/updating candidate profile from Google data:", error);
-    throw error; 
-  }
-};
+//     if (profile) {
+//       // Optionally update if Google provides newer info, though for login this might not be necessary
+//       // For example, if a user changes their name on Google.
+//       // profile.firstName = firstName || profile.firstName;
+//       // profile.lastName = lastName || profile.lastName;
+//       // await profile.save();
+//     } else {
+//       // Create new profile if it doesn't exist
+//       profile = new Candidate({
+//         userId,
+//         firstName: firstName || '', 
+//         lastName: lastName || '',  
+//         email: googleEmail, // Store email in profile as well if your schema has it
+//         // birthDate: null, // Birthdate is not provided by Google token info by default
+//         // Other fields can be set to default or prompted later
+//       });
+//       await profile.save();
+//     }
+//     return profile;
+//   } catch (error) {
+//     console.error("Error creating/updating candidate profile from Google data:", error);
+//     throw error; 
+//   }
+// };
 
 // Main Google Sign-In/Registration handler
 const signInWithGoogle = async (req, res) => {
@@ -152,18 +152,13 @@ const signInWithGoogle = async (req, res) => {
     let isNewUser = false;
 
     if (user) {
-      // User exists with this email.
-      // If they don't have a googleId, link it. This handles cases where a user
-      // signed up with email/password first, then uses Google Sign-In.
+
       if (!user.googleId) {
         user.googleId = googleId;
-        // Optionally update other fields if desired, e.g., profile picture URL
-        // user.profilePictureUrl = picture || user.profilePictureUrl; 
+
         await user.save();
       } else if (user.googleId !== googleId) {
-        // Edge case: Email exists, but with a different Google account.
-        // This shouldn't happen if email is unique and Google IDs are correctly linked.
-        // Or, it could mean an attempt to link an already Google-linked email to another Google account.
+
         return res.status(400).json({ error: "This email is associated with a different Google account."});
       }
     } else {
@@ -197,7 +192,7 @@ const signInWithGoogle = async (req, res) => {
     
     const message = isNewUser ? "User registered and signed in with Google successfully." : "User signed in with Google successfully.";
 
-    return res.status(isNewUser ? 201 : 200).json({
+    res.status(isNewUser ? 201 : 200).json({
       message,
       token,
       user: userResponse
@@ -211,7 +206,7 @@ const signInWithGoogle = async (req, res) => {
             return res.status(401).json({ error: "Invalid or expired Google access token." });
         }
     }
-    return res.status(500).json({ error: "Server error during Google sign-in." });
+    res.status(500).json({ error: "Server error during Google sign-in." });
   }
 };
 

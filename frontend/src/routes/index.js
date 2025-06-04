@@ -11,7 +11,7 @@ import JobOffersList from '../pages/JobOffers/List';
 import Login from '../pages/Login';
 import Register from '../pages/Register';
 import PrivateRoute from '../components/PrivateRoute';
-import Dashboard from '../pages/Dashboard';
+import Dashboard from '../pages/Candidate/Dashboard';
 
 const routes = [
   // Public routes
@@ -36,7 +36,7 @@ const routes = [
   {
     path: '/dashboard',
     element: (
-      <ProtectedRoute>
+      <ProtectedRoute allowedRoles={['candidate']}> 
         <Dashboard />
       </ProtectedRoute>
     )

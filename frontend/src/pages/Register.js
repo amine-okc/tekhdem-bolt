@@ -1,28 +1,25 @@
 import React, { useState, useEffect } from 'react';
 import { LockIcon, MailIcon, UserIcon } from 'lucide-react';
 import axios from 'axios';
-
+import { authSlice, setCredentials } from '../store/authSlice'; // Adjust the import path as needed
 // Imports for Google Sign-In
-// We are hoping the environment can resolve this. If not, this part won't work in preview
-// but the code is structured correctly for a project with this package installed.
 import { GoogleOAuthProvider, useGoogleLogin } from '@react-oauth/google';
 
-// --- Mocks for functionalities not available in this single-file preview ---
-// Mock for react-router-dom's useNavigate
-const useNavigate = () => {
-  return (path) => console.log(`Mock navigate to: ${path}`);
+// Imports for React Router
+import { BrowserRouter, Routes, Route, useNavigate } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+
+
+
+// --- Minimal Redux Slice (authSlice.js content) ---
+const initialAuthState = {
+  user: null,
+  token: null,
 };
 
-// Mock for react-redux's useDispatch
-const useDispatch = () => {
-  return (action) => console.log('Mock dispatch:', action);
-};
 
-// Mock for a Redux action creator (e.g., from authSlice)
-const setCredentials = (credentials) => {
-  return { type: 'MOCK_SET_CREDENTIALS', payload: credentials };
-};
-// --- End Mocks ---
+
+
 
 const RegisterPageContent = () => {
   const [formData, setFormData] = useState({
@@ -34,8 +31,16 @@ const RegisterPageContent = () => {
   });
   const [error, setError] = useState('');
   const [isLoading, setIsLoading] = useState(false);
-  const navigate = useNavigate(); // Uses mock
-  const dispatch = useDispatch(); // Uses mock
+  const navigate = useNavigate(); // Real useNavigate
+  const dispatch = useDispatch(); // Real useDispatch
+
+  // Example of how you might use useSelector if needed:
+  // const { user: currentUser } = useSelector((state) => state.auth);
+  // useEffect(() => {
+  //   if (currentUser) {
+  //     console.log("Current user from Redux store:", currentUser);
+  //   }
+  // }, [currentUser]);
 
   const handleChange = (e) => {
     setFormData({
@@ -57,14 +62,13 @@ const RegisterPageContent = () => {
 
     try {
       console.log("Attempting registration with formData:", formData);
-      // Register the user
       const registerResponse = await axios.post(`${process.env.REACT_APP_BASE_URL}/candidate/register`, formData);
       console.log("Registration response:", registerResponse);
       
       if (registerResponse.data.token && registerResponse.data.user) {
         const { token, user } = registerResponse.data;
-        dispatch(setCredentials({ user, token })); // Uses mock
-        navigate('/dashboard'); // Uses mock
+        dispatch(setCredentials({ user, token }));
+        navigate('/dashboard');
       } else {
         console.log("Registration didn't return token, attempting login fallback");
         const loginResponse = await axios.post(`${process.env.REACT_APP_BASE_URL}/user/login`, {
@@ -73,8 +77,8 @@ const RegisterPageContent = () => {
         });
         console.log("Login fallback response:", loginResponse);
         const { token, user } = loginResponse.data;
-        dispatch(setCredentials({ user, token })); // Uses mock
-        navigate('/dashboard'); // Uses mock
+        dispatch(setCredentials({ user, token }));
+        navigate('/dashboard');
       }
     } catch (err) {
       console.error("Registration/Login Error:", err);
@@ -84,20 +88,19 @@ const RegisterPageContent = () => {
     }
   };
 
-  // Google Sign-In Logic
   const handleGoogleLoginSuccess = async (tokenResponse) => {
     setError('');
     setIsLoading(true);
     console.log("Google login success, tokenResponse:", tokenResponse);
     try {
-      const backendResponse = await axios.post(`${process.env.REACT_APP_BASE_URL}/candidate/auth/google-signin`, {
+      const backendResponse = await axios.post(`${process.env.REACT_APP_BASE_URL}/candidate/auth/google-signup`, {
         googleAccessToken: tokenResponse.access_token,
       });
       console.log("Backend response to Google Sign-In:", backendResponse);
 
       const { token, user } = backendResponse.data;
-      dispatch(setCredentials({ user, token })); // Uses mock
-      navigate('/dashboard'); // Uses mock
+      dispatch(setCredentials({ user, token }));
+      navigate('/dashboard');
 
     } catch (err) {
       console.error("Google Sign-In Backend Error:", err);
@@ -120,9 +123,8 @@ const RegisterPageContent = () => {
   const triggerGoogleSignUp = () => {
     if (isLoading) return;
     console.log("Triggering Google Sign-Up");
-    googleLogin(); 
+    googleLogin();
   };
-
 
   return (
     <div className="min-h-screen flex flex-col lg:flex-row font-sans"> {/* Added font-sans for Inter */}
@@ -223,8 +225,6 @@ const RegisterPageContent = () => {
               </div>
             </div>
 
-
-
             <div>
               <label htmlFor="email" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
                 Adresse email
@@ -280,11 +280,11 @@ const RegisterPageContent = () => {
               />
               <label htmlFor="terms" className="ml-2 block text-sm text-gray-700 dark:text-gray-300">
                 J'accepte les{' '}
-                <a href="#" onClick={(e) => e.preventDefault()} className="font-medium text-primary-600 hover:text-primary-500 dark:text-primary-400 dark:hover:text-primary-300">
+                <a href="#" onClick={(e) => { e.preventDefault(); alert("Navigating to Terms & Conditions page (mock)");}} className="font-medium text-primary-600 hover:text-primary-500 dark:text-primary-400 dark:hover:text-primary-300">
                   termes et conditions
                 </a>
                 {' '}et la{' '}
-                <a href="#" onClick={(e) => e.preventDefault()} className="font-medium text-primary-600 hover:text-primary-500 dark:text-primary-400 dark:hover:text-primary-300">
+                <a href="#" onClick={(e) => { e.preventDefault(); alert("Navigating to Privacy Policy page (mock)");}} className="font-medium text-primary-600 hover:text-primary-500 dark:text-primary-400 dark:hover:text-primary-300">
                   politique de confidentialité
                 </a>
               </label>
@@ -310,7 +310,7 @@ const RegisterPageContent = () => {
           </form>
            <p className="text-sm text-center text-gray-600 dark:text-gray-400">
             Déjà un compte?{' '}
-            <a href="#" onClick={(e) => e.preventDefault()} className="font-medium text-primary-600 hover:text-primary-500 dark:text-primary-400 dark:hover:text-primary-300">
+            <a href="#" onClick={(e) => { e.preventDefault(); alert("Navigating to Login page (mock)"); navigate('/login'); }} className="font-medium text-primary-600 hover:text-primary-500 dark:text-primary-400 dark:hover:text-primary-300">
               Se connecter
             </a>
           </p>
@@ -320,65 +320,18 @@ const RegisterPageContent = () => {
   );
 };
 
-// Main component that provides the GoogleOAuthProvider
-const App = () => { // Renamed to App as per convention for default export
-  const googleClientId = process.env.REACT_APP_GOOGLE_CLIENT_ID || "YOUR_GOOGLE_CLIENT_ID"; // Fallback for environment
-
-  // Effect to ensure Tailwind's primary color definition is available for focus rings etc.
-  // This is a common setup if you have custom primary colors in tailwind.config.js
-  // For this environment, we assume default Tailwind colors are fine.
-  // Define primary colors for Tailwind focus rings if not default
-  useEffect(() => {
-    const style = document.createElement('style');
-
-    document.head.appendChild(style);
-
-    // Load Inter font from Google Fonts
-    const fontLink = document.createElement('link');
-    fontLink.href = 'https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap';
-    fontLink.rel = 'stylesheet';
-    document.head.appendChild(fontLink);
-
-
-    return () => {
-      document.head.removeChild(style);
-      if (fontLink) document.head.removeChild(fontLink);
-    };
-  }, []);
-
-
-  if (!googleClientId || googleClientId === "YOUR_GOOGLE_CLIENT_ID") {
-    console.warn("REACT_APP_GOOGLE_CLIENT_ID is not defined or is using a placeholder. Google Sign-In will likely fail actual authentication.");
-    // Render a more informative message if client ID is missing
-    return (
-        <div className="min-h-screen flex items-center justify-center bg-gray-100 dark:bg-gray-900 p-4 font-sans">
-            <div className="p-8 bg-white dark:bg-gray-800 shadow-2xl rounded-xl text-center max-w-lg">
-                <MailIcon className="h-16 w-16 text-primary-500 mx-auto mb-6"/>
-                <h1 className="text-2xl font-bold text-red-600 dark:text-red-400 mb-4">Erreur de Configuration</h1>
-                <p className="text-gray-700 dark:text-gray-300 mb-2">
-                    L'identifiant client Google (<code>REACT_APP_GOOGLE_CLIENT_ID</code>) est manquant ou utilise une valeur par défaut.
-                </p>
-                <p className="text-gray-600 dark:text-gray-400 mb-6">
-                    La connexion avec Google ne pourra pas être initialisée correctement. Veuillez vous assurer que cette variable d'environnement est correctement configurée.
-                </p>
-                <p className="text-sm text-gray-500 dark:text-gray-500">
-                  (Le reste du formulaire d'inscription est rendu ci-dessous à des fins de démonstration de la mise en page, mais la fonctionnalité Google sera inactive.)
-                </p>
-                <div className="mt-8 border-t dark:border-gray-700 pt-8 opacity-50 pointer-events-none">
-                    {/* Show the form content but disabled / non-functional for Google part */}
-                    <RegisterPageContent />
-                </div>
-            </div>
-        </div>
-    );
-  }
-
+const RegisterPage = () => {
   return (
-    // It's crucial that GoogleOAuthProvider wraps any component using useGoogleLogin
-    <GoogleOAuthProvider clientId={googleClientId}>
+    <GoogleOAuthProvider clientId={process.env.REACT_APP_GOOGLE_CLIENT_ID}>
       <RegisterPageContent />
     </GoogleOAuthProvider>
   );
 };
 
-export default App; // Exporting 'App' as the main component
+
+
+
+// Main component that provides the GoogleOAuthProvider, Redux Provider, and Router
+
+export default RegisterPage;
+

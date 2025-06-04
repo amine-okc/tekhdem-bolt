@@ -1,6 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { LockIcon, MailIcon } from 'lucide-react';
 import axios from 'axios';
+import { authSlice, setCredentials } from '../store/authSlice'; // Adjust the import path as necessary
+
+// Imports for Redux
+import { useDispatch, useSelector } from 'react-redux';
+
+// Imports for React Router
+import { BrowserRouter, useNavigate, Routes, Route, Link } from 'react-router-dom';
 
 // Imports for Google Sign-In
 // The '@react-oauth/google' package is essential for this functionality.
@@ -9,43 +16,28 @@ import axios from 'axios';
 // demonstrates the correct usage for a project where this package is properly installed and configured.
 import { GoogleOAuthProvider, useGoogleLogin } from '@react-oauth/google';
 
-// --- Mocks for functionalities not available in this single-file preview ---
-const useNavigate = () => {
-  return (path) => console.log(`Mock navigate to: ${path}`);
-};
 
-const useDispatch = () => {
-  return (action) => console.log('Mock dispatch:', action);
-};
 
-const useSelector = (selector) => {
-  // Mock a basic auth state, assuming no token initially.
-  return selector({ auth: { token: null, user: null } }); 
-};
 
-const setCredentials = (credentials) => {
-  return { type: 'MOCK_SET_CREDENTIALS', payload: credentials };
-};
-// --- End Mocks ---
+
 
 const LoginPageContent = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const [isLoading, setIsLoading] = useState(false);
+  
+  // Using actual hooks
   const navigate = useNavigate(); 
   const dispatch = useDispatch(); 
-  const { token: authToken } = useSelector((state) => state.auth); 
+  const { token: authToken, user: authUser } = useSelector((state) => state.auth); 
 
   useEffect(() => {
-    // This effect attempts to redirect if a token is found (e.g., after login).
-    // In the mocked environment, `authToken` won't update post-dispatch,
-    // so this navigation won't trigger automatically from state change here.
-    if (authToken) {
-      console.log('Auth token found (mocked), would navigate to /dashboard in a real app.');
+    // Redirect if already logged in
+    if (authToken && authUser) {
       navigate('/dashboard'); 
     }
-  }, [authToken, navigate]);
+  }, [authToken, authUser, navigate]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -53,17 +45,16 @@ const LoginPageContent = () => {
     setIsLoading(true);
 
     try {
+      // Fallback for REACT_APP_BASE_URL if not set in environment
       const baseUrl = process.env.REACT_APP_BASE_URL || "https://api.example.com"; 
       const response = await axios.post(`${baseUrl}/user/login`, { 
         email,
         password
       });
-      console.log("Login response:", response.data);
       const { token, user } = response.data;
 
+      // Dispatch action to set credentials in Redux store
       dispatch(setCredentials({ user, token })); 
-      console.log("Login successful, attempting to navigate to /dashboard.");
-      navigate('/dashboard'); 
 
     } catch (err) {
       console.error("Login error:", err);
@@ -78,16 +69,13 @@ const LoginPageContent = () => {
   };
 
   // Google Sign-In Logic
-  // We attempt to use `useGoogleLogin` here. If '@react-oauth/google' could not be resolved
-  // at compile time, this hook will not be available, and `triggerGoogleLogin` will likely fail.
-  let googleLoginFlow = () => { // Default to a no-op if useGoogleLogin is not available
-    console.error("useGoogleLogin hook is not available. Google Sign-In cannot be initiated.");
-    setError("Le module de connexion Google n'a pas pu être chargé.");
+  let googleLoginFlow = () => { 
+    console.error("useGoogleLogin hook is not available or not initialized. Google Sign-In cannot be initiated.");
+    setError("Le module de connexion Google n'a pas pu être chargé ou initialisé.");
   };
 
   try {
     // This assignment will only work if useGoogleLogin was successfully imported.
-    // If the import failed, this line might not execute or `useGoogleLogin` would be undefined.
     const actualUseGoogleLogin = useGoogleLogin; 
     if (typeof actualUseGoogleLogin === 'function') {
         googleLoginFlow = actualUseGoogleLogin({
@@ -106,8 +94,7 @@ const LoginPageContent = () => {
                 
                 dispatch(setCredentials({ user, token })); 
                 console.log("Google login successful, attempting to navigate to /dashboard.");
-                navigate('/dashboard'); 
-
+                // Navigation will be handled by useEffect
               } catch (err) {
                 console.error("Google Sign-In Backend Error:", err);
                 if (err.isAxiosError && !err.response) {
@@ -127,19 +114,34 @@ const LoginPageContent = () => {
           });
     }
   } catch (e) {
-    // This catch block is for errors during the setup of useGoogleLogin itself,
-    // which might occur if the library is partially loaded or fails in an unexpected way.
     console.error("Error initializing useGoogleLogin:", e);
-    // The `googleLoginFlow` remains the no-op function.
   }
 
 
   const triggerGoogleLogin = () => {
     if (isLoading) return;
     console.log("Attempting to trigger Google Login");
-    // `googleLoginFlow` will either be the actual Google login function or the no-op error handler.
     googleLoginFlow(); 
   };
+
+  // If already authenticated, show a message or redirect (useEffect handles redirect)
+  if (authToken && authUser) {
+    return (
+        <div className="min-h-screen flex flex-col items-center justify-center bg-gray-100 dark:bg-gray-800 p-6 font-sans">
+            <div className="bg-white dark:bg-gray-900 p-8 rounded-xl shadow-2xl text-center max-w-md w-full">
+                <h1 className="text-2xl font-bold text-primary-600 dark:text-primary-400 mb-4">Déjà connecté</h1>
+                <p className="text-gray-700 dark:text-gray-300 mb-6">
+                    Vous êtes déjà connecté en tant que {authUser.email}. Redirection vers le tableau de bord...
+                </p>
+                <svg className="animate-spin h-8 w-8 text-primary-500 mx-auto" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                    <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                    <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                </svg>
+            </div>
+        </div>
+    );
+  }
+
 
   return (
     <div className="min-h-screen flex flex-col lg:flex-row font-sans">
@@ -294,81 +296,13 @@ const LoginPageContent = () => {
   );
 };
 
-// Main component that provides the GoogleOAuthProvider
-const App = () => { 
-  const googleClientId = process.env.REACT_APP_GOOGLE_CLIENT_ID || "YOUR_GOOGLE_CLIENT_ID_PLACEHOLDER"; 
-
-  useEffect(() => {
-    const style = document.createElement('style');
-    style.innerHTML = `
-      :root {
-        --color-primary-50: #eff6ff; --color-primary-100: #dbeafe; --color-primary-200: #bfdbfe;
-        --color-primary-300: #93c5fd; --color-primary-400: #60a5fa; --color-primary-500: #3b82f6; /* Tailwind Blue 500 */
-        --color-primary-600: #2563eb; --color-primary-700: #1d4ed8; --color-primary-800: #1e40af;
-        --color-primary-900: #1e3a8a;
-      }
-      body { font-family: 'Inter', sans-serif; }
-      .text-primary-600 { color: var(--color-primary-600) !important; }
-      .hover\\:text-primary-500:hover { color: var(--color-primary-500) !important; }
-      .dark .dark\\:text-primary-400 { color: var(--color-primary-400) !important; }
-      .dark .dark\\:hover\\:text-primary-300:hover { color: var(--color-primary-300) !important; }
-      .bg-primary-600 { background-color: var(--color-primary-600) !important; }
-      .hover\\:bg-primary-700:hover { background-color: var(--color-primary-700) !important; }
-      .focus\\:ring-primary-500:focus { --tw-ring-color: var(--color-primary-500) !important; box-shadow: 0 0 0 2px var(--tw-ring-color) !important; }
-      .dark .dark\\:focus\\:ring-primary-400:focus { --tw-ring-color: var(--color-primary-400) !important; box-shadow: 0 0 0 2px var(--tw-ring-color) !important; }
-    `;
-    document.head.appendChild(style);
-
-    const fontLink = document.createElement('link');
-    fontLink.href = 'https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap';
-    fontLink.rel = 'stylesheet';
-    document.head.appendChild(fontLink);
-
-    return () => {
-      document.head.removeChild(style);
-      if (fontLink) document.head.removeChild(fontLink);
-    };
-  }, []);
-
-  const isGoogleClientConfigured = googleClientId && googleClientId !== "YOUR_GOOGLE_CLIENT_ID_PLACEHOLDER";
-
-  // It's crucial that GoogleOAuthProvider is rendered if Google Sign-In is to be attempted.
-  // If the client ID is missing/invalid, the provider itself might handle this or show an error.
-  // If the @react-oauth/google package itself is not resolved, then GoogleOAuthProvider and useGoogleLogin will not be available.
-  if (!isGoogleClientConfigured) {
-    console.warn("REACT_APP_GOOGLE_CLIENT_ID is not defined or is a placeholder. Google Sign-In functionality will be impaired or non-functional.");
-    // Render a clear message to the user about the configuration issue.
-    // LoginPageContent is rendered below so the user can still see the email/password form.
-    // The Google button will be visible but likely non-functional if the provider/hook isn't properly initialized.
-     return (
-        <div className="min-h-screen flex items-center justify-center bg-gray-100 dark:bg-gray-900 p-4 font-sans">
-            <div className="p-8 bg-white dark:bg-gray-800 shadow-2xl rounded-xl text-center max-w-lg">
-                <MailIcon className="h-16 w-16 text-primary-500 mx-auto mb-6"/>
-                <h1 className="text-2xl font-bold text-red-600 dark:text-red-400 mb-4">Erreur de Configuration Google</h1>
-                <p className="text-gray-700 dark:text-gray-300 mb-2">
-                    L'identifiant client Google (<code>REACT_APP_GOOGLE_CLIENT_ID</code>) est manquant ou invalide.
-                </p>
-                <p className="text-gray-600 dark:text-gray-400 mb-6">
-                    La connexion avec Google ne pourra pas être initialisée correctement. Veuillez vérifier la configuration.
-                </p>
-                 <div className="mt-8 border-t dark:border-gray-700 pt-8 opacity-80"> 
-                    <p className="text-sm text-gray-500 dark:text-gray-500 mb-4">
-                      (Le formulaire de connexion est affiché ci-dessous. La fonctionnalité Google sera inactive si le module Google n'a pas pu être chargé ou configuré.)
-                    </p>
-                    <LoginPageContent /> 
-                </div>
-            </div>
-        </div>
-    );
-  }
-  
-  // If Google Client ID is configured, wrap LoginPageContent with GoogleOAuthProvider.
-  // This is necessary for `useGoogleLogin` within LoginPageContent to function.
+const LoginPage = () => {
   return (
-    <GoogleOAuthProvider clientId={googleClientId}>
+    <GoogleOAuthProvider clientId={process.env.REACT_APP_GOOGLE_CLIENT_ID}>
       <LoginPageContent />
     </GoogleOAuthProvider>
   );
 };
 
-export default App;
+
+export default LoginPage;

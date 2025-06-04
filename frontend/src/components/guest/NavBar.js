@@ -15,6 +15,7 @@ import {
     FaUser,
     FaCog,
     FaChevronDown,
+    FaDashcube,
 } from 'react-icons/fa';
 
 const NavBar = ({ onLogout }) => {
@@ -81,6 +82,11 @@ const NavBar = ({ onLogout }) => {
             icon: <FaUser className="mr-3 text-sm" />
         },
         {
+            title: 'Tableau de bord',
+            path: '/dashboard',
+            icon: <FaDashcube className="mr-3 text-sm" />
+        },
+        {
             title: 'Paramètres',
             path: '/settings',
             icon: <FaCog className="mr-3 text-sm" />
@@ -141,8 +147,8 @@ const NavBar = ({ onLogout }) => {
     };
 
     const getUserAvatar = () => {
-        if (!user) return '/default-avatar.png';
-        return user.avatar || user.profile_picture || '/default-avatar.png';
+        if (!user) return '/pictures/avatar.avif';
+        return user.profile_picture || '/pictures/avatar.avif';
     };
 
     return (
