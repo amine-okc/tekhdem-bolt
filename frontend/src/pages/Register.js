@@ -1,54 +1,46 @@
 import React, { useState } from 'react';
 import { LockIcon, MailIcon, UserIcon } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
+import { setAuthToken, setUser } from '../utils/auth';
 
 const RegisterPage = () => {
-  const [firstName, setFirstName] = useState('');
-  const [lastName, setLastName] = useState('');
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [confirmPassword, setConfirmPassword] = useState('');
-  const [birthDate, setBirthDate] = useState('');
+  const [formData, setFormData] = useState({
+    firstName: '',
+    lastName: '',
+    email: '',
+    password: '',
+    confirmPassword: '',
+    birthDate: ''
+  });
+  const [error, setError] = useState('');
+  const navigate = useNavigate();
+
+  const handleChange = (e) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value
+    });
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    
-    if (password !== confirmPassword) {
-      alert('Les mots de passe ne correspondent pas');
+    setError('');
+
+    if (formData.password !== formData.confirmPassword) {
+      setError('Les mots de passe ne correspondent pas');
       return;
     }
 
-    const candidateData = {
-      firstName,
-      lastName,
-      email,
-      password,
-      birthDate,
-    };
-
     try {
-      // Integrate with your API here
-      const response = await fetch('http://localhost:4000/api/candidate/register', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(candidateData),
-      });
-      const data = await response.json();
-      if (response.ok) {
-        console.log('Inscription réussie');
-        localStorage.setItem('token', data.token);
-        console.log('User:', data.user);
-        localStorage.setItem('user', JSON.stringify(data.user));
-        // Redirige l'utilisateur vers la page de complétion du profil
-       // window.location.href = '/complete-profile';
-      } else {
-        console.log('Erreur lors de l\'inscription');
-        // Show error message
-      }
-    } catch (error) {
-      console.error('Erreur:', error);
-      // Handle error
+      const response = await axios.post(`${process.env.REACT_APP_BASE_URL}/candidate/register`, formData);
+      const { token, user } = response.data;
+      
+      setAuthToken(token);
+      setUser(user);
+      navigate('/dashboard');
+    } catch (err) {
+      setError(err.response?.data?.error || 'Une erreur est survenue lors de l\'inscription');
     }
   };
 
@@ -114,6 +106,12 @@ const RegisterPage = () => {
           </div>
 
           <form onSubmit={handleSubmit} className="space-y-5">
+            {error && (
+              <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded">
+                {error}
+              </div>
+            )}
+            
             {/* First and Last Name - Two columns on larger screens */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
@@ -127,8 +125,9 @@ const RegisterPage = () => {
                   <input
                     type="text"
                     id="firstName"
-                    value={firstName}
-                    onChange={(e) => setFirstName(e.target.value)}
+                    name="firstName"
+                    value={formData.firstName}
+                    onChange={handleChange}
                     required
                     className="w-full pl-10 pr-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg 
                                focus:outline-none focus:ring-2 focus:ring-primary-500 dark:focus:ring-primary-400
@@ -149,8 +148,9 @@ const RegisterPage = () => {
                   <input
                     type="text"
                     id="lastName"
-                    value={lastName}
-                    onChange={(e) => setLastName(e.target.value)}
+                    name="lastName"
+                    value={formData.lastName}
+                    onChange={handleChange}
                     required
                     className="w-full pl-10 pr-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg 
                                focus:outline-none focus:ring-2 focus:ring-primary-500 dark:focus:ring-primary-400
@@ -170,8 +170,9 @@ const RegisterPage = () => {
                 <input
                   type="date"
                   id="birthDate"
-                  value={birthDate}
-                  onChange={(e) => setBirthDate(e.target.value)}
+                  name="birthDate"
+                  value={formData.birthDate}
+                  onChange={handleChange}
                   required
                   className="w-full py-2 pl-3 pr-3 border border-gray-300 dark:border-gray-600 rounded-lg 
                              focus:outline-none focus:ring-2 focus:ring-primary-500 dark:focus:ring-primary-400
@@ -191,8 +192,9 @@ const RegisterPage = () => {
                 <input
                   type="email"
                   id="email"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
+                  name="email"
+                  value={formData.email}
+                  onChange={handleChange}
                   required
                   className="w-full pl-10 pr-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg 
                              focus:outline-none focus:ring-2 focus:ring-primary-500 dark:focus:ring-primary-400
@@ -213,8 +215,9 @@ const RegisterPage = () => {
                 <input
                   type="password"
                   id="password"
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
+                  name="password"
+                  value={formData.password}
+                  onChange={handleChange}
                   required
                   className="w-full pl-10 pr-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg 
                              focus:outline-none focus:ring-2 focus:ring-primary-500 dark:focus:ring-primary-400
@@ -235,8 +238,9 @@ const RegisterPage = () => {
                 <input
                   type="password"
                   id="confirmPassword"
-                  value={confirmPassword}
-                  onChange={(e) => setConfirmPassword(e.target.value)}
+                  name="confirmPassword"
+                  value={formData.confirmPassword}
+                  onChange={handleChange}
                   required
                   className="w-full pl-10 pr-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg 
                              focus:outline-none focus:ring-2 focus:ring-primary-500 dark:focus:ring-primary-400
