@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import { LockIcon, MailIcon, UserIcon } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
 import axios from 'axios';
-import { setAuthToken, setUser } from '../utils/auth';
+import { setCredentials } from '../store/authSlice';
 
 const RegisterPage = () => {
   const [formData, setFormData] = useState({
@@ -14,7 +15,9 @@ const RegisterPage = () => {
     birthDate: ''
   });
   const [error, setError] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const handleChange = (e) => {
     setFormData({
@@ -26,21 +29,39 @@ const RegisterPage = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError('');
+    setIsLoading(true);
 
     if (formData.password !== formData.confirmPassword) {
       setError('Les mots de passe ne correspondent pas');
+      setIsLoading(false);
       return;
     }
 
     try {
-      const response = await axios.post(`${process.env.REACT_APP_BASE_URL}/candidate/register`, formData);
-      const { token, user } = response.data;
+      // Register the user
+      const registerResponse = await axios.post(`${process.env.REACT_APP_BASE_URL}/candidate/register`, formData);
       
-      setAuthToken(token);
-      setUser(user);
-      navigate('/dashboard');
+      // If registration is successful, automatically log in the user
+      if (registerResponse.data.token && registerResponse.data.user) {
+        // Use the token and user from registration response
+        const { token, user } = registerResponse.data;
+        dispatch(setCredentials({ user, token }));
+        navigate('/dashboard');
+      } else {
+        // If registration doesn't return token, perform login
+        const loginResponse = await axios.post(`${process.env.REACT_APP_BASE_URL}/user/login`, {
+          email: formData.email,
+          password: formData.password
+        });
+        
+        const { token, user } = loginResponse.data;
+        dispatch(setCredentials({ user, token }));
+        navigate('/dashboard');
+      }
     } catch (err) {
       setError(err.response?.data?.error || 'Une erreur est survenue lors de l\'inscription');
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -85,9 +106,11 @@ const RegisterPage = () => {
             <button
               type="button"
               onClick={handleGoogleSignUp}
+              disabled={isLoading}
               className="w-full flex items-center justify-center gap-3 py-3 px-4 border border-gray-300 dark:border-gray-600 rounded-lg 
                         text-gray-700 dark:text-white bg-white dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-700 
-                        focus:outline-none focus:ring-2 focus:ring-gray-500 transition-colors duration-300"
+                        focus:outline-none focus:ring-2 focus:ring-gray-500 transition-colors duration-300
+                        disabled:opacity-50 disabled:cursor-not-allowed"
             >
               <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                 <path d="M20.283 10.356h-8.327v3.451h4.792c-.446 2.193-2.313 3.453-4.792 3.453a5.27 5.27 0 0 1-5.279-5.28 5.27 5.27 0 0 1 5.279-5.279c1.259 0 2.397.447 3.29 1.178l2.6-2.599c-1.584-1.381-3.615-2.233-5.89-2.233a8.908 8.908 0 0 0-8.934 8.934 8.907 8.907 0 0 0 8.934 8.934c4.467 0 8.529-3.249 8.529-8.934 0-.528-.081-1.097-.202-1.625z"></path>
@@ -129,9 +152,11 @@ const RegisterPage = () => {
                     value={formData.firstName}
                     onChange={handleChange}
                     required
+                    disabled={isLoading}
                     className="w-full pl-10 pr-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg 
                                focus:outline-none focus:ring-2 focus:ring-primary-500 dark:focus:ring-primary-400
-                               bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
+                               bg-white dark:bg-gray-700 text-gray-900 dark:text-white
+                               disabled:opacity-50 disabled:cursor-not-allowed"
                     placeholder="Prénom"
                   />
                 </div>
@@ -152,9 +177,11 @@ const RegisterPage = () => {
                     value={formData.lastName}
                     onChange={handleChange}
                     required
+                    disabled={isLoading}
                     className="w-full pl-10 pr-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg 
                                focus:outline-none focus:ring-2 focus:ring-primary-500 dark:focus:ring-primary-400
-                               bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
+                               bg-white dark:bg-gray-700 text-gray-900 dark:text-white
+                               disabled:opacity-50 disabled:cursor-not-allowed"
                     placeholder="Nom"
                   />
                 </div>
@@ -174,9 +201,11 @@ const RegisterPage = () => {
                   value={formData.birthDate}
                   onChange={handleChange}
                   required
+                  disabled={isLoading}
                   className="w-full py-2 pl-3 pr-3 border border-gray-300 dark:border-gray-600 rounded-lg 
                              focus:outline-none focus:ring-2 focus:ring-primary-500 dark:focus:ring-primary-400
-                             bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
+                             bg-white dark:bg-gray-700 text-gray-900 dark:text-white
+                             disabled:opacity-50 disabled:cursor-not-allowed"
                 />
               </div>
             </div>
@@ -196,9 +225,11 @@ const RegisterPage = () => {
                   value={formData.email}
                   onChange={handleChange}
                   required
+                  disabled={isLoading}
                   className="w-full pl-10 pr-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg 
                              focus:outline-none focus:ring-2 focus:ring-primary-500 dark:focus:ring-primary-400
-                             bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
+                             bg-white dark:bg-gray-700 text-gray-900 dark:text-white
+                             disabled:opacity-50 disabled:cursor-not-allowed"
                   placeholder="votre@email.com"
                 />
               </div>
@@ -219,9 +250,11 @@ const RegisterPage = () => {
                   value={formData.password}
                   onChange={handleChange}
                   required
+                  disabled={isLoading}
                   className="w-full pl-10 pr-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg 
                              focus:outline-none focus:ring-2 focus:ring-primary-500 dark:focus:ring-primary-400
-                             bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
+                             bg-white dark:bg-gray-700 text-gray-900 dark:text-white
+                             disabled:opacity-50 disabled:cursor-not-allowed"
                   placeholder="Minimum 8 caractères"
                 />
               </div>
@@ -242,9 +275,11 @@ const RegisterPage = () => {
                   value={formData.confirmPassword}
                   onChange={handleChange}
                   required
+                  disabled={isLoading}
                   className="w-full pl-10 pr-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg 
                              focus:outline-none focus:ring-2 focus:ring-primary-500 dark:focus:ring-primary-400
-                             bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
+                             bg-white dark:bg-gray-700 text-gray-900 dark:text-white
+                             disabled:opacity-50 disabled:cursor-not-allowed"
                   placeholder="Confirmez votre mot de passe"
                 />
               </div>
@@ -255,7 +290,9 @@ const RegisterPage = () => {
                 id="terms"
                 type="checkbox"
                 required
-                className="h-4 w-4 text-primary-600 focus:ring-primary-500 peer-checked:border-primary-600 border-gray-300 rounded"
+                disabled={isLoading}
+                className="h-4 w-4 text-primary-600 focus:ring-primary-500 peer-checked:border-primary-600 border-gray-300 rounded
+                           disabled:opacity-50 disabled:cursor-not-allowed"
               />
               <label htmlFor="terms" className="ml-2 block text-sm text-gray-700 dark:text-gray-300">
                 J'accepte les{' '}
@@ -271,9 +308,21 @@ const RegisterPage = () => {
 
             <button
               type="submit"
-              className="w-full py-3 px-4 bg-primary-600 hover:bg-primary-700 text-white rounded-lg transition-colors duration-300"
+              disabled={isLoading}
+              className="w-full py-3 px-4 bg-primary-600 hover:bg-primary-700 text-white rounded-lg transition-colors duration-300
+                         disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center"
             >
-              S'inscrire
+              {isLoading ? (
+                <>
+                  <svg className="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                    <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                    <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                  </svg>
+                  Inscription en cours...
+                </>
+              ) : (
+                "S'inscrire"
+              )}
             </button>
           </form>
         </div>

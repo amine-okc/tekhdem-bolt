@@ -36,3 +36,6 @@ export const logout = () => {
   delete axios.defaults.headers.common['Authorization'];
   window.location.href = '/login';
 };
+
+
+
