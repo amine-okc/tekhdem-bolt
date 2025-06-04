@@ -310,7 +310,7 @@ const RegisterPageContent = () => {
           </form>
            <p className="text-sm text-center text-gray-600 dark:text-gray-400">
             Déjà un compte?{' '}
-            <a href="#" onClick={(e) => { e.preventDefault(); alert("Navigating to Login page (mock)"); navigate('/login'); }} className="font-medium text-primary-600 hover:text-primary-500 dark:text-primary-400 dark:hover:text-primary-300">
+            <a href='#' onClick={(e) => {  navigate('/login'); }} className="font-medium text-primary-600 hover:text-primary-500 dark:text-primary-400 dark:hover:text-primary-300">
               Se connecter
             </a>
           </p>

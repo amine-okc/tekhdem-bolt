@@ -279,7 +279,7 @@ const LoginPageContent = () => {
           <div className="text-center space-y-2">
              <p className="text-sm text-gray-600 dark:text-gray-400">
               Pas de compte ?{' '}
-              <a href="#" onClick={(e) => {e.preventDefault(); console.log("Register link clicked!");}} className="font-medium text-primary-600 hover:text-primary-500 dark:text-primary-400 dark:hover:text-primary-300">
+              <a href="#" onClick={(e) => {e.preventDefault(); navigate('/register')}} className="font-medium text-primary-600 hover:text-primary-500 dark:text-primary-400 dark:hover:text-primary-300">
                 Inscrivez-vous
               </a>
             </p>
@@ -306,3 +306,5 @@ const LoginPage = () => {
 
 
 export default LoginPage;
+
+

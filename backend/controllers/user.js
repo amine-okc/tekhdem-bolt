@@ -126,7 +126,7 @@ const signInWithGoogle = async (req, res) => {
   const { googleAccessToken } = req.body;
 
   if (!googleAccessToken) {
-    return res.status(400).json({ error: "Google access token is required." });
+    res.status(400).json({ error: "Google access token is required." });
   }
 
   try {
@@ -143,7 +143,7 @@ const signInWithGoogle = async (req, res) => {
         // Critical check: Ensure the token was intended for your application
         console.error("Token audience mismatch or GOOGLE_CLIENT_ID not set.");
         // console.error(`Token AUD: ${googleResponse.data.aud}, Expected AUD: ${process.env.GOOGLE_CLIENT_ID}`);
-        return res.status(401).json({ error: "Invalid Google token audience." });
+        res.status(401).json({ error: "Invalid Google token audience." });
     }
 
 
@@ -163,7 +163,7 @@ const signInWithGoogle = async (req, res) => {
       }
     } else {
       // User does not exist, create a new user
-      res.status(400).json({ error: "No user found with this email. Please sign up first." });
+      return res.status(400).json({ error: "No user found with this email. Please sign up first." });
     }
 
     // 3. Create or update candidate profile
@@ -199,7 +199,7 @@ const signInWithGoogle = async (req, res) => {
     });
 
   } catch (err) {
-    console.error("Google Sign-In Server Error:", err.response ? err.response.data : err.message);
+    console.error("Google Sign-In Server Error : ", err.response ? err.response.data : err.message);
     if (err.isAxiosError && err.response && err.response.data) {
         const googleError = err.response.data.error;
         if (googleError === "invalid_token" || googleError === "invalid_grant") {
